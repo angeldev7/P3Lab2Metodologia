@@ -7,10 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Tests para la clase Cita del Lab 2
- * Validaciones de funcionalidad basica sin GUI
- */
 class CitaTest {
     
     private Cita cita;

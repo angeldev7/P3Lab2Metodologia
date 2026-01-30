@@ -13,9 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Tests para GestorDisponibilidad del Lab 2
- */
 class GestorDisponibilidadTest {
     
     private GestorDisponibilidad gestor;

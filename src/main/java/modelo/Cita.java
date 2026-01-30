@@ -4,13 +4,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
 
-/**
- * Representa una cita médica en el sistema.
- * Basado en HU-001: Agendar Cita del Lab 1
- * 
- * Como paciente, quiero agendar una cita médica 
- * para que pueda recibir atención médica en el horario deseado.
- */
 public class Cita {
     private String id;
     private String pacienteId;
@@ -38,7 +31,6 @@ public class Cita {
         this.estado = EstadoCita.PENDIENTE;
     }
     
-    // Métodos de validación
     private String validarId(String id) {
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID no puede ser nulo o vacío");
@@ -70,7 +62,6 @@ public class Cita {
         return tipo.trim();
     }
     
-    // Métodos de negocio
     public void confirmar() {
         if (estado == EstadoCita.CANCELADA) {
             throw new IllegalStateException("No se puede confirmar una cita cancelada");

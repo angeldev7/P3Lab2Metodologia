@@ -4,11 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Tests para el controlador principal de la GUI
- * Nota: Tests de GUI completos requieren entorno grafico
- * Aqui solo verificamos la logica de negocio
- */
 class ControladorPrincipalTest {
     
     @Test

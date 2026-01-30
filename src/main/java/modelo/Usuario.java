@@ -2,13 +2,6 @@ package modelo;
 
 import java.util.Objects;
 
-/**
- * Representa un usuario del sistema de gestión de citas.
- * Basado en HU-006: Gestionar Usuarios del Lab 1
- * 
- * Como administrador, quiero gestionar usuarios del sistema
- * para que puedan acceder según sus roles y permisos.
- */
 public class Usuario {
     private String id;
     private String nombre;
@@ -45,7 +38,6 @@ public class Usuario {
         this.activo = true;
     }
     
-    // Métodos de validación
     private String validarId(String id) {
         if (id == null || id.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID no puede ser nulo o vacío");
@@ -68,7 +60,6 @@ public class Usuario {
             throw new IllegalArgumentException("El email no puede ser nulo o vacío");
         }
         String emailLimpio = email.trim().toLowerCase();
-        // Validación básica de email
         if (!emailLimpio.contains("@") || !emailLimpio.contains(".")) {
             throw new IllegalArgumentException("Formato de email inválido");
         }
@@ -82,7 +73,6 @@ public class Usuario {
         return tipo;
     }
     
-    // Métodos de negocio
     public void activar() {
         this.activo = true;
     }
