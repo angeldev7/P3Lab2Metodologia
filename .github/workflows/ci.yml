@@ -23,20 +23,20 @@ jobs:
         
     - name: Mostrar información del proyecto
       run: |
-        echo "🏥 Sistema de Gestión de Citas Médicas - Lab 2"
-        echo "📋 Ejecutando suite de pruebas para 3 historias críticas:"
+        echo "Sistema de Gestión de Citas Médicas - Lab 2"
+        echo "Ejecutando suite de pruebas para 3 historias críticas:"
         echo "   - HU-001: Agendar Cita"
         echo "   - HU-002: Consultar Disponibilidad" 
         echo "   - HU-006: Gestionar Usuarios"
         
     - name: Validar estructura del proyecto
       run: |
-        echo "📁 Verificando estructura del proyecto..."
+        echo "Verificando estructura del proyecto..."
         ls -la
         if [ -f pom.xml ]; then
-          echo "✅ pom.xml encontrado"
+          echo "OK - pom.xml encontrado"
         else
-          echo "❌ pom.xml NO encontrado"
+          echo "ERROR - pom.xml NO encontrado"
           exit 1
         fi
         ls -la src/main/java/
@@ -47,27 +47,27 @@ jobs:
       
     - name: Ejecutar suite de pruebas
       run: |
-        echo "🧪 Ejecutando pruebas automatizadas..."
+        echo "Ejecutando pruebas automatizadas..."
         mvn -B test
         
     - name: Generar reporte de cobertura JaCoCo
       run: |
-        echo "📊 Generando reporte de cobertura..."
+        echo "Generando reporte de cobertura..."
         mvn -B jacoco:report
         
-    - name: Verificar cobertura mínima (70%)
+    - name: Verificar cobertura mínima
       run: |
-        echo "🎯 Verificando cobertura mínima del 70%..."
+        echo "Verificando cobertura mínima (90% líneas, 80% branches)..."
         mvn -B jacoco:check
         
     - name: Mostrar resumen de cobertura
       run: |
-        echo "📈 Resumen de cobertura de código:"
+        echo "Resumen de cobertura de código:"
         if [ -f target/site/jacoco/index.html ]; then
-          echo "✅ Reporte de cobertura generado exitosamente"
-          echo "📄 Ubicación: target/site/jacoco/index.html"
+          echo "OK - Reporte de cobertura generado exitosamente"
+          echo "Ubicación: target/site/jacoco/index.html"
         else
-          echo "❌ Error: No se pudo generar el reporte de cobertura"
+          echo "ERROR - No se pudo generar el reporte de cobertura"
         fi
         
     - name: Subir reporte de cobertura
@@ -89,12 +89,12 @@ jobs:
     - name: Resumen de resultados
       if: always()
       run: |
-        echo "🏁 Resumen de ejecución del pipeline:"
-        echo "📊 Historias probadas: 3 historias críticas del Lab 1"
-        echo "🧪 Pruebas ejecutadas: $(find target/surefire-reports -name "*.xml" | wc -l) archivos de reporte"
-        echo "📈 Reporte de cobertura: target/site/jacoco/index.html"
+        echo "Resumen de ejecución del pipeline:"
+        echo "Historias probadas: 3 historias críticas del Lab 1"
+        echo "Pruebas ejecutadas: $(find target/surefire-reports -name "*.xml" | wc -l) archivos de reporte"
+        echo "Reporte de cobertura: target/site/jacoco/index.html"
         echo ""
-        echo "✨ ¡Pipeline CI/CD completado para el Sistema de Gestión de Citas Médicas!"
+        echo "Pipeline CI/CD completado para el Sistema de Gestión de Citas Médicas"
         
   quality-check:
     runs-on: ubuntu-latest
@@ -113,24 +113,24 @@ jobs:
         
     - name: Validación de calidad de código
       run: |
-        echo "🔍 Ejecutando validaciones de calidad adicionales..."
+        echo "Ejecutando validaciones de calidad adicionales..."
         mvn -B compile
         
     - name: Verificar que no hay warnings de compilación
       run: |
-        echo "⚠️  Verificando warnings de compilación..."
+        echo "Verificando warnings de compilación..."
         mvn -B compile 2>&1 | tee compile.log
         if grep -q "WARNING" compile.log; then
-          echo "❌ Se encontraron warnings de compilación"
+          echo "ERROR - Se encontraron warnings de compilación"
           grep "WARNING" compile.log
           exit 1
         else
-          echo "✅ No se encontraron warnings de compilación"
+          echo "OK - No se encontraron warnings de compilación"
         fi
         
     - name: Resumen de validación de calidad
       run: |
-        echo "✅ Validaciones de calidad completadas:"
+        echo "Validaciones de calidad completadas:"
         echo "   - Compilación sin warnings"
         echo "   - Código fuente validado"
         echo "   - Estructura del proyecto verificada"
