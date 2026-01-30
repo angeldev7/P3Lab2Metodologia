@@ -4,29 +4,20 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
-/**
- * Panel para gestion de usuarios del sistema
- * Equivalente a la seccion de administracion de usuarios del HTML
- */
 public class PanelUsuarios extends JPanel {
-    
-    private JTable tablaUsuarios;
-    private DefaultTableModel modeloTabla;
-    private JButton btnAgregarUsuario;
-    private JButton btnEditarUsuario;
-    private JButton btnEliminarUsuario;
-    private JTextField txtBuscar;
     
     private static final String[] COLUMNAS = {
         "ID", "Nombre", "Apellido", "Email", "Tipo", "Estado"
     };
     
-    public PanelUsuarios() {
-        inicializarComponentes();
-        configurarLayout();
-    }
+    private final JTable tablaUsuarios;
+    private final DefaultTableModel modeloTabla;
+    private final JButton btnAgregarUsuario;
+    private final JButton btnEditarUsuario;
+    private final JButton btnEliminarUsuario;
+    private final JTextField txtBuscar;
     
-    private void inicializarComponentes() {
+    public PanelUsuarios() {
         modeloTabla = new DefaultTableModel(COLUMNAS, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -40,7 +31,6 @@ public class PanelUsuarios extends JPanel {
         btnAgregarUsuario = new JButton("Agregar Usuario");
         btnEditarUsuario = new JButton("Editar");
         btnEliminarUsuario = new JButton("Eliminar");
-        
         txtBuscar = new JTextField(20);
         
         btnEditarUsuario.setEnabled(false);
@@ -51,6 +41,8 @@ public class PanelUsuarios extends JPanel {
             btnEditarUsuario.setEnabled(haySeleccion);
             btnEliminarUsuario.setEnabled(haySeleccion);
         });
+        
+        configurarLayout();
     }
     
     private void configurarLayout() {
@@ -78,10 +70,27 @@ public class PanelUsuarios extends JPanel {
         add(panelBotones, BorderLayout.SOUTH);
     }
     
-    public JTable getTablaUsuarios() { return tablaUsuarios; }
-    public DefaultTableModel getModeloTabla() { return modeloTabla; }
-    public JButton getBtnAgregarUsuario() { return btnAgregarUsuario; }
-    public JButton getBtnEditarUsuario() { return btnEditarUsuario; }
-    public JButton getBtnEliminarUsuario() { return btnEliminarUsuario; }
-    public JTextField getTxtBuscar() { return txtBuscar; }
+    public JTable getTablaUsuarios() {
+        return tablaUsuarios;
+    }
+    
+    public DefaultTableModel getModeloTabla() {
+        return modeloTabla;
+    }
+    
+    public JButton getBtnAgregarUsuario() {
+        return btnAgregarUsuario;
+    }
+    
+    public JButton getBtnEditarUsuario() {
+        return btnEditarUsuario;
+    }
+    
+    public JButton getBtnEliminarUsuario() {
+        return btnEliminarUsuario;
+    }
+    
+    public JTextField getTxtBuscar() {
+        return txtBuscar;
+    }
 }

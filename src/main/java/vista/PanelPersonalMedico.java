@@ -3,24 +3,15 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Panel para el personal medico
- * Equivalente a la seccion de configuracion de horarios del HTML
- */
 public class PanelPersonalMedico extends JPanel {
     
-    private JComboBox<String> comboProfesional;
-    private JTable tablaHorarios;
-    private JButton btnConfigurarHorarios;
-    private JButton btnVerCitas;
-    private JTextArea textAreaEstadisticas;
+    private final JComboBox<String> comboProfesional;
+    private final JTable tablaHorarios;
+    private final JButton btnConfigurarHorarios;
+    private final JButton btnVerCitas;
+    private final JTextArea textAreaEstadisticas;
     
     public PanelPersonalMedico() {
-        inicializarComponentes();
-        configurarLayout();
-    }
-    
-    private void inicializarComponentes() {
         comboProfesional = new JComboBox<>();
         
         String[] columnas = {"Dia", "Hora Inicio", "Hora Fin", "Estado"};
@@ -31,6 +22,8 @@ public class PanelPersonalMedico extends JPanel {
         
         textAreaEstadisticas = new JTextArea(5, 20);
         textAreaEstadisticas.setEditable(false);
+        
+        configurarLayout();
     }
     
     private void configurarLayout() {
@@ -59,9 +52,23 @@ public class PanelPersonalMedico extends JPanel {
         add(panelBotones, BorderLayout.SOUTH);
     }
     
-    public JComboBox<String> getComboProfesional() { return comboProfesional; }
-    public JTable getTablaHorarios() { return tablaHorarios; }
-    public JButton getBtnConfigurarHorarios() { return btnConfigurarHorarios; }
-    public JButton getBtnVerCitas() { return btnVerCitas; }
-    public JTextArea getTextAreaEstadisticas() { return textAreaEstadisticas; }
+    public JComboBox<String> getComboProfesional() {
+        return comboProfesional;
+    }
+    
+    public JTable getTablaHorarios() {
+        return tablaHorarios;
+    }
+    
+    public JButton getBtnConfigurarHorarios() {
+        return btnConfigurarHorarios;
+    }
+    
+    public JButton getBtnVerCitas() {
+        return btnVerCitas;
+    }
+    
+    public JTextArea getTextAreaEstadisticas() {
+        return textAreaEstadisticas;
+    }
 }

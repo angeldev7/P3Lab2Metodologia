@@ -3,33 +3,21 @@ package vista;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Panel de administracion del sistema
- * Equivalente al dashboard administrativo del HTML
- */
 public class PanelAdministracion extends JPanel {
     
-    private JLabel lblTotalCitas;
-    private JLabel lblCitasConfirmadas;
-    private JLabel lblCitasPendientes;
-    private JLabel lblCitasCanceladas;
-    private JLabel lblTotalUsuarios;
-    private JLabel lblDoctoresActivos;
-    private JLabel lblEficienciaSistema;
-    
-    private JButton btnGenerarReporte;
-    private JButton btnExportarDatos;
-    private JButton btnConfiguracion;
-    
-    private JTextArea textAreaReporte;
+    private final JLabel lblTotalCitas;
+    private final JLabel lblCitasConfirmadas;
+    private final JLabel lblCitasPendientes;
+    private final JLabel lblCitasCanceladas;
+    private final JLabel lblTotalUsuarios;
+    private final JLabel lblDoctoresActivos;
+    private final JLabel lblEficienciaSistema;
+    private final JButton btnGenerarReporte;
+    private final JButton btnExportarDatos;
+    private final JButton btnConfiguracion;
+    private final JTextArea textAreaReporte;
     
     public PanelAdministracion() {
-        inicializarComponentes();
-        configurarLayout();
-    }
-    
-    private void inicializarComponentes() {
-        // Labels para estadisticas
         lblTotalCitas = new JLabel("Total Citas: 0");
         lblCitasConfirmadas = new JLabel("Confirmadas: 0");
         lblCitasPendientes = new JLabel("Pendientes: 0");
@@ -38,14 +26,14 @@ public class PanelAdministracion extends JPanel {
         lblDoctoresActivos = new JLabel("Doctores Activos: 0");
         lblEficienciaSistema = new JLabel("Eficiencia: 0%");
         
-        // Botones
         btnGenerarReporte = new JButton("Generar Reporte");
         btnExportarDatos = new JButton("Exportar Datos");
         btnConfiguracion = new JButton("Configuracion");
         
-        // Area de reporte
         textAreaReporte = new JTextArea(10, 30);
         textAreaReporte.setEditable(false);
+        
+        configurarLayout();
     }
     
     private void configurarLayout() {
@@ -55,10 +43,8 @@ public class PanelAdministracion extends JPanel {
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 18));
         add(lblTitulo, BorderLayout.NORTH);
         
-        // Panel de estadisticas
         JPanel panelEstadisticas = new JPanel(new GridLayout(3, 3, 10, 10));
         panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadisticas del Sistema"));
-        
         panelEstadisticas.add(lblTotalCitas);
         panelEstadisticas.add(lblCitasConfirmadas);
         panelEstadisticas.add(lblCitasPendientes);
@@ -70,7 +56,6 @@ public class PanelAdministracion extends JPanel {
         JPanel panelSuperior = new JPanel(new BorderLayout());
         panelSuperior.add(panelEstadisticas, BorderLayout.NORTH);
         
-        // Panel de botones
         JPanel panelBotones = new JPanel(new FlowLayout());
         panelBotones.add(btnGenerarReporte);
         panelBotones.add(btnExportarDatos);
@@ -79,7 +64,6 @@ public class PanelAdministracion extends JPanel {
         
         add(panelSuperior, BorderLayout.NORTH);
         
-        // Area de reporte
         JPanel panelReporte = new JPanel(new BorderLayout());
         panelReporte.setBorder(BorderFactory.createTitledBorder("Reporte Detallado"));
         panelReporte.add(new JScrollPane(textAreaReporte), BorderLayout.CENTER);
@@ -87,20 +71,49 @@ public class PanelAdministracion extends JPanel {
         add(panelReporte, BorderLayout.CENTER);
     }
     
-    // Getters
-    public JLabel getLblTotalCitas() { return lblTotalCitas; }
-    public JLabel getLblCitasConfirmadas() { return lblCitasConfirmadas; }
-    public JLabel getLblCitasPendientes() { return lblCitasPendientes; }
-    public JLabel getLblCitasCanceladas() { return lblCitasCanceladas; }
-    public JLabel getLblTotalUsuarios() { return lblTotalUsuarios; }
-    public JLabel getLblDoctoresActivos() { return lblDoctoresActivos; }
-    public JLabel getLblEficienciaSistema() { return lblEficienciaSistema; }
+    public JLabel getLblTotalCitas() {
+        return lblTotalCitas;
+    }
     
-    public JButton getBtnGenerarReporte() { return btnGenerarReporte; }
-    public JButton getBtnExportarDatos() { return btnExportarDatos; }
-    public JButton getBtnConfiguracion() { return btnConfiguracion; }
+    public JLabel getLblCitasConfirmadas() {
+        return lblCitasConfirmadas;
+    }
     
-    public JTextArea getTextAreaReporte() { return textAreaReporte; }
+    public JLabel getLblCitasPendientes() {
+        return lblCitasPendientes;
+    }
+    
+    public JLabel getLblCitasCanceladas() {
+        return lblCitasCanceladas;
+    }
+    
+    public JLabel getLblTotalUsuarios() {
+        return lblTotalUsuarios;
+    }
+    
+    public JLabel getLblDoctoresActivos() {
+        return lblDoctoresActivos;
+    }
+    
+    public JLabel getLblEficienciaSistema() {
+        return lblEficienciaSistema;
+    }
+    
+    public JButton getBtnGenerarReporte() {
+        return btnGenerarReporte;
+    }
+    
+    public JButton getBtnExportarDatos() {
+        return btnExportarDatos;
+    }
+    
+    public JButton getBtnConfiguracion() {
+        return btnConfiguracion;
+    }
+    
+    public JTextArea getTextAreaReporte() {
+        return textAreaReporte;
+    }
     
     public void actualizarEstadisticas(int totalCitas, int confirmadas, int pendientes, 
                                      int canceladas, int totalUsuarios, int doctoresActivos, double eficiencia) {

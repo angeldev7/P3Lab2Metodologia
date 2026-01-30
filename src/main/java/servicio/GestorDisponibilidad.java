@@ -111,9 +111,8 @@ public class GestorDisponibilidad {
     }
     
     public List<Cita> obtenerCitasDeProfesional(String profesionalId) {
-        if (profesionalId == null || profesionalId.trim().isEmpty()) {
-            throw new IllegalArgumentException("El ID del profesional no puede ser nulo o vacío");
-        validarIdNoVacio(profesionalId);ist<Cita> citas = citasPorProfesional.get(profesionalId);
+        validarIdNoVacio(profesionalId);
+        List<Cita> citas = citasPorProfesional.get(profesionalId);
         return citas != null ? new ArrayList<>(citas) : new ArrayList<>();
     }
     
