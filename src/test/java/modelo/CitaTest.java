@@ -102,4 +102,157 @@ class CitaTest {
         assertTrue(citaStr.contains("DOC-001"));
         assertTrue(citaStr.contains("PENDIENTE"));
     }
+    
+    @Test
+    @DisplayName("Setear motivo valido")
+    void testSetearMotivo() {
+        cita.setMotivo("Dolor de cabeza persistente");
+        assertEquals("Dolor de cabeza persistente", cita.getMotivo());
+    }
+    
+    @Test
+    @DisplayName("Estados multiples en secuencia")
+    void testEstadosMultiples() {
+        assertEquals(Cita.EstadoCita.PENDIENTE, cita.getEstado());
+        cita.confirmar();
+        assertEquals(Cita.EstadoCita.CONFIRMADA, cita.getEstado());
+        cita.completar();
+        assertEquals(Cita.EstadoCita.COMPLETADA, cita.getEstado());
+    }
+    
+    @Test
+    @DisplayName("Paciente ID null lanza excepcion")
+    void testPacienteIdNullLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Cita("CIT-003", null, "DOC-001", fechaHora, "Consulta General");
+        });
+    }
+    
+    @Test
+    @DisplayName("Profesional ID null lanza excepcion")
+    void testProfesionalIdNullLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Cita("CIT-004", "PAC-001", null, fechaHora, "Consulta General");
+        });
+    }
+    
+    @Test
+    @DisplayName("Fecha null lanza excepcion")
+    void testFechaNullLanzaExcepcion() {
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Cita("CIT-005", "PAC-001", "DOC-001", null, "Consulta General");
+        });
+    }
+    
+    @Test
+    @DisplayName("Cita con tipo Especialista")
+    void testCitaEspecialista() {
+        Cita citaEsp = new Cita("CIT-006", "PAC-001", "DOC-002", fechaHora, "Especialista");
+        assertEquals("Especialista", citaEsp.getTipo());
+    }
+    
+    @Test
+    @DisplayName("Cita con tipo Examenes")
+    void testCitaExamenes() {
+        Cita citaExam = new Cita("CIT-007", "PAC-001", "DOC-003", fechaHora, "Examenes");
+        assertEquals("Examenes", citaExam.getTipo());
+    }
+    
+    @Test
+    @DisplayName("Cita con tipo Seguimiento")
+    void testCitaSeguimiento() {
+        Cita citaSeg = new Cita("CIT-008", "PAC-001", "DOC-004", fechaHora, "Seguimiento");
+        assertEquals("Seguimiento", citaSeg.getTipo());
+    }
+    
+    @Test
+    @DisplayName("Confirmar cita cancelada lanza excepcion")
+    void testConfirmarCitaCanceladaLanzaExcepcion() {
+        cita.cancelar();
+        assertThrows(IllegalStateException.class, () -> {
+            cita.confirmar();
+        });
+    }
+    
+    @Test
+    @DisplayName("Cancelar cita completada lanza excepcion")
+    void testCancelarCitaCompletadaLanzaExcepcion() {
+        cita.confirmar();
+        cita.completar();
+        assertThrows(IllegalStateException.class, () -> {
+            cita.cancelar();
+        });
+    }
+    
+    @Test
+    @DisplayName("Completar cita no confirmada lanza excepcion")
+    void testCompletarCitaNoConfirmadaLanzaExcepcion() {
+        assertThrows(IllegalStateException.class, () -> {
+            cita.completar();
+        });
+    }
+    
+    @Test
+    @DisplayName("Verificar si cita es en fecha")
+    void testEsEnFecha() {
+        assertTrue(cita.esEnFecha(fechaHora));
+        assertFalse(cita.esEnFecha(fechaHora.plusDays(1)));
+    }
+    
+    @Test
+    @DisplayName("Verificar conflicto de citas por tiempo")
+    void testTieneConflicto() {
+        LocalDateTime horarioCercano = fechaHora.plusMinutes(15);
+        assertTrue(cita.tieneConflicto(horarioCercano));
+        
+        LocalDateTime horarioLejano = fechaHora.plusMinutes(60);
+        assertFalse(cita.tieneConflicto(horarioLejano));
+    }
+    
+    @Test
+    @DisplayName("Setear fecha hora valida")
+    void testSetearFechaHora() {
+        LocalDateTime nuevaFecha = LocalDateTime.now().plusDays(2);
+        cita.setFechaHora(nuevaFecha);
+        assertEquals(nuevaFecha, cita.getFechaHora());
+    }
+    
+    @Test
+    @DisplayName("Setear tipo valido")
+    void testSetearTipo() {
+        cita.setTipo("Especialista");
+        assertEquals("Especialista", cita.getTipo());
+    }
+    
+    @Test
+    @DisplayName("Equals con misma cita")
+    void testEqualsMismaCita() {
+        assertTrue(cita.equals(cita));
+    }
+    
+    @Test
+    @DisplayName("Equals con null")
+    void testEqualsNull() {
+        assertFalse(cita.equals(null));
+    }
+    
+    @Test
+    @DisplayName("Equals con objeto diferente")
+    void testEqualsObjetoDiferente() {
+        assertFalse(cita.equals("no es una cita"));
+    }
+    
+    @Test
+    @DisplayName("Equals con cita mismo ID")
+    void testEqualsMismoId() {
+        Cita otraCita = new Cita("CIT-001", "PAC-002", "DOC-002", fechaHora, "Consulta General");
+        assertTrue(cita.equals(otraCita));
+    }
+    
+    @Test
+    @DisplayName("HashCode consistente")
+    void testHashCode() {
+        Cita otraCita = new Cita("CIT-001", "PAC-002", "DOC-002", fechaHora, "Consulta General");
+        assertEquals(cita.hashCode(), otraCita.hashCode());
+    }
 }

@@ -32,8 +32,15 @@ jobs:
     - name: Validar estructura del proyecto
       run: |
         echo "📁 Verificando estructura del proyecto..."
-        ls -la src/main/java/com/metodologia/
-        ls -la src/test/java/com/metodologia/
+        ls -la
+        if [ -f pom.xml ]; then
+          echo "✅ pom.xml encontrado"
+        else
+          echo "❌ pom.xml NO encontrado"
+          exit 1
+        fi
+        ls -la src/main/java/
+        ls -la src/test/java/
         
     - name: Instalar dependencias
       run: mvn -B clean compile
