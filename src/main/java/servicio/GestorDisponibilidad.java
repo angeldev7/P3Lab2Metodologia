@@ -16,27 +16,21 @@ public class GestorDisponibilidad {
     }
     
     public void configurarHorarios(String profesionalId, Set<LocalDateTime> horarios) {
-        if (profesionalId == null || profesionalId.trim().isEmpty()) {
-            throw new IllegalArgumentException("El ID del profesional no puede ser nulo o vacío");
-        }
+        validarIdNoVacio(profesionalId);
         if (horarios == null || horarios.isEmpty()) {
             throw new IllegalArgumentException("Los horarios no pueden ser nulos o vacíos");
         }
         
         LocalDateTime ahora = LocalDateTime.now();
-        for (LocalDateTime horario : horarios) {
-            if (horario.isBefore(ahora)) {
-                throw new IllegalArgumentException("No se pueden configurar horarios en el pasado");
-            }
+        if (horarios.stream().anyMatch(h -> h.isBefore(ahora))) {
+            throw new IllegalArgumentException("No se pueden configurar horarios en el pasado");
         }
         
         horariosDisponibles.put(profesionalId, new HashSet<>(horarios));
     }
     
     public List<LocalDateTime> consultarDisponibilidad(String profesionalId, LocalDateTime fecha) {
-        if (profesionalId == null || profesionalId.trim().isEmpty()) {
-            throw new IllegalArgumentException("El ID del profesional no puede ser nulo o vacío");
-        }
+        validarIdNoVacio(profesionalId);
         if (fecha == null) {
             throw new IllegalArgumentException("La fecha no puede ser nula");
         }
@@ -103,9 +97,7 @@ public class GestorDisponibilidad {
     }
     
     public boolean cancelarCita(String citaId) {
-        if (citaId == null || citaId.trim().isEmpty()) {
-            throw new IllegalArgumentException("El ID de la cita no puede ser nulo o vacío");
-        }
+        validarIdNoVacio(citaId);
         
         for (List<Cita> citas : citasPorProfesional.values()) {
             for (Cita cita : citas) {
@@ -121,9 +113,7 @@ public class GestorDisponibilidad {
     public List<Cita> obtenerCitasDeProfesional(String profesionalId) {
         if (profesionalId == null || profesionalId.trim().isEmpty()) {
             throw new IllegalArgumentException("El ID del profesional no puede ser nulo o vacío");
-        }
-        
-        List<Cita> citas = citasPorProfesional.get(profesionalId);
+        validarIdNoVacio(profesionalId);ist<Cita> citas = citasPorProfesional.get(profesionalId);
         return citas != null ? new ArrayList<>(citas) : new ArrayList<>();
     }
     
@@ -148,5 +138,11 @@ public class GestorDisponibilidad {
         estadisticas.put("horariosLibres", Math.max(0, horariosLibres));
         
         return estadisticas;
+    }
+    
+    private void validarIdNoVacio(String id) {
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("El ID del profesional no puede ser nulo o vacío");
+        }
     }
 }

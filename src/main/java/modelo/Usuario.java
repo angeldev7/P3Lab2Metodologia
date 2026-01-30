@@ -100,42 +100,54 @@ public class Usuario {
         return String.format("%s %s", nombre, apellido);
     }
     
-    // Getters y Setters
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
     
-    public String getNombre() { return nombre; }
+    public String getNombre() {
+        return nombre;
+    }
     
     public void setNombre(String nombre) {
         this.nombre = validarNombre(nombre);
     }
     
-    public String getApellido() { return apellido; }
+    public String getApellido() {
+        return apellido;
+    }
     
     public void setApellido(String apellido) {
         this.apellido = validarNombre(apellido);
     }
     
-    public String getEmail() { return email; }
+    public String getEmail() {
+        return email;
+    }
     
     public void setEmail(String email) {
         this.email = validarEmail(email);
     }
     
-    public String getTelefono() { return telefono; }
-    
-    public void setTelefono(String telefono) { 
-        this.telefono = telefono; 
+    public String getTelefono() {
+        return telefono;
     }
     
-    public TipoUsuario getTipo() { return tipo; }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    
+    public TipoUsuario getTipo() {
+        return tipo;
+    }
     
     public void setTipo(TipoUsuario tipo) {
         this.tipo = validarTipo(tipo);
     }
     
-    public boolean isActivo() { return activo; }
+    public boolean isActivo() {
+        return activo;
+    }
     
-    // equals, hashCode y toString
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

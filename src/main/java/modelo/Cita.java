@@ -52,11 +52,8 @@ public class Cita {
         if (tipo == null || tipo.trim().isEmpty()) {
             throw new IllegalArgumentException("El tipo de cita no puede ser nulo o vacío");
         }
-        String tipoNormalizado = tipo.trim().toLowerCase();
-        if (!tipoNormalizado.equals("consulta general") && 
-            !tipoNormalizado.equals("especialista") &&
-            !tipoNormalizado.equals("examenes") &&
-            !tipoNormalizado.equals("seguimiento")) {
+        String normalizado = tipo.trim().toLowerCase();
+        if (!normalizado.matches("consulta general|especialista|examenes|seguimiento")) {
             throw new IllegalArgumentException("Tipo de cita no válido: " + tipo);
         }
         return tipo.trim();
@@ -88,36 +85,48 @@ public class Cita {
     }
     
     public boolean tieneConflicto(LocalDateTime otraFechaHora) {
-        // Considera conflicto si está en la misma hora (ventana de 30 minutos)
         return Math.abs(ChronoUnit.MINUTES.between(fechaHora, otraFechaHora)) < 30;
     }
     
-    // Getters y Setters
-    public String getId() { return id; }
+    public String getId() {
+        return id;
+    }
     
-    public String getPacienteId() { return pacienteId; }
+    public String getPacienteId() {
+        return pacienteId;
+    }
     
-    public String getProfesionalId() { return profesionalId; }
+    public String getProfesionalId() {
+        return profesionalId;
+    }
     
-    public LocalDateTime getFechaHora() { return fechaHora; }
+    public LocalDateTime getFechaHora() {
+        return fechaHora;
+    }
     
     public void setFechaHora(LocalDateTime fechaHora) {
         this.fechaHora = validarFechaHora(fechaHora);
     }
     
-    public String getTipo() { return tipo; }
+    public String getTipo() {
+        return tipo;
+    }
     
     public void setTipo(String tipo) {
         this.tipo = validarTipo(tipo);
     }
     
-    public String getMotivo() { return motivo; }
-    
-    public void setMotivo(String motivo) { 
-        this.motivo = motivo; 
+    public String getMotivo() {
+        return motivo;
     }
     
-    public EstadoCita getEstado() { return estado; }
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+    
+    public EstadoCita getEstado() {
+        return estado;
+    }
     
     // equals, hashCode y toString
     @Override

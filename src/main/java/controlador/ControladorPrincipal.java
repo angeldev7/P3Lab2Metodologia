@@ -12,10 +12,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-/**
- * Controlador principal del sistema MVC
- * Maneja toda la logica de negocio y coordina entre vista y modelo
- */
 public class ControladorPrincipal {
     
     private VentanaPrincipal ventanaPrincipal;
@@ -23,9 +19,8 @@ public class ControladorPrincipal {
     private Map<String, Usuario> usuarios;
     private Map<String, Cita> citas;
     private int contadorCitas;
-    
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
     
     public ControladorPrincipal() {
         inicializarModelo();
