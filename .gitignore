@@ -89,8 +89,7 @@ ehthumbs.db
 Thumbs.db
 
 # Test Results
-*.xml
-surefire-reports/
+surefire-reports/*.xml
 site/
 
 # Generated files
