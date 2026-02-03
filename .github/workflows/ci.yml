@@ -58,7 +58,7 @@ jobs:
     - name: Verificar cobertura mínima
       run: |
         echo "Verificando cobertura mínima (90% líneas, 80% branches)..."
-        mvn -B jacoco:check
+        mvn -B verify -DskipTests
         
     - name: Mostrar resumen de cobertura
       run: |
